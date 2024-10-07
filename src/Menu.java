@@ -43,8 +43,6 @@ public class Menu {
 
     // Methode de classe
     public int afficherMenu() {
-        // Créer un Scanner
-        Scanner sc = new Scanner(System.in);
         // Créer la variable choix qui sera retourner à la fin
         int choix;
         do {
@@ -58,7 +56,13 @@ public class Menu {
             System.out.println("Entrer votre choix : ");
 
             // Gérer l'entrer de l'utilisateur
-            choix = sc.nextInt();
+            // Créer un Scanner
+            Scanner sc = new Scanner(System.in);
+            try {
+                choix = sc.nextInt();
+            } catch (Exception e) {
+                choix = -1;
+            }
         } while (choix > this.options.length || choix < 0);
         return choix;
     }
