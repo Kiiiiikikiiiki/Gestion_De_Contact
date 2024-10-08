@@ -1,5 +1,17 @@
 import java.util.*;
 
+/**
+ * Une <code>ArrayList</code> de <code>Contact</code>
+ * <p>*Noter que les méthodes utilise des menu de la classe <code>Menu2</code>*</p>
+ * <p>Permet la gestion d'une liste de contacts avec la possibilité de</p>
+ * <ul>
+ *     <li>Ajouter un contact</li>
+ *     <li>Modifier un contact</li>
+ *     <li>Supprimer un contact</li>
+ *     <li>Rechercher un contact</li>
+ *     <li>Afficher un contact</li>
+ * </ul>
+ * */
 public class ListeContact extends ArrayList<Contact>{
     // Constructeur
     public ListeContact(Contact... contacts){ // var args de Contact peut prendre 0 à plusieur Contact
@@ -11,7 +23,11 @@ public class ListeContact extends ArrayList<Contact>{
         super();
     }
 
-    // Méthode
+    // Méthode public
+    /**
+     * Permert d'ajouter un contact à la liste de contact en demandant à l'utilisateur d'entrer les informations du
+     * contact.
+     * */
     public void ajouterContact() {
         Scanner sc = new Scanner(System.in);
 
@@ -35,6 +51,10 @@ public class ListeContact extends ArrayList<Contact>{
         this.add(new Contact(nom, prenom, numeroTel, email));
     }
 
+    /**
+     * Permet la modification d'un contact si la liste de contact n'est pas vide.
+     * L'utilisateur peut ensuite choisir la modification qu'il souhaite modifier et la modifier.
+     * */
     public void modifierContact(){
         String contacts = obtenirListeContact(this);
         // Vérifier que la liste n'est pas empty
@@ -87,6 +107,9 @@ public class ListeContact extends ArrayList<Contact>{
         }
     }
 
+    /**
+     * Permet la suppression d'un contact dans la liste.
+     * */
     public void supprimerContact(){
         String contacts = obtenirListeContact(this);
         if (!contacts.isEmpty()){
@@ -99,6 +122,13 @@ public class ListeContact extends ArrayList<Contact>{
         }
     }
 
+    /**
+     * <p>L'utilisateur peut faire une recherche dans sa liste de contact.</p>
+     * <p>La recherche fonctionne comme suis :</p>
+     * Une fois l'entré de recherche de l'utilisateur saisi, on lui retourne une liste de contact qui corresponde à
+     * la recherche effectué -> Recherche sois dans le prenom ou le nom d'un contact si il commence par la chaine
+     * de charactère entré par l'utilisateur.
+     * */
     public void rechercherContact() {
         // Obtenir l'élément de recherche de l'utilisateur
         String response = Menu2.afficherMenu("Recherche de contact", "Entrer votre élément de recherche : ",
@@ -124,6 +154,9 @@ public class ListeContact extends ArrayList<Contact>{
         }
     }
 
+    /**
+     * Affiche la liste complète et détaillé de tout les contacts dans la liste.
+     * */
     public void afficherContact() {
         if (!isEmptyList()){
             Menu2.afficherMenu("Affichage des contacts", "Voici la liste de vos contacts dans votre répertoire : \n" +
@@ -133,6 +166,10 @@ public class ListeContact extends ArrayList<Contact>{
     }
 
     // Méthode private
+    /**
+     * Obtient une liste contenant que les prenom et nom de tout les contacts dans la liste de contact
+     * @return un string avec les contacts qui sont séparé du symbole '/'
+     * */
     private String obtenirListeContact(ListeContact lc){
         StringBuilder contacts = new StringBuilder();
         // Vérifier que la liste n'est pas empty
@@ -148,6 +185,10 @@ public class ListeContact extends ArrayList<Contact>{
         return contacts.toString();
     }
 
+    /**
+     * Obtenir les contacts qui match avec l'entrée de recherche
+     * @return une ListeContact contenant les contacts correpondant à la recherche
+     * */
     private ListeContact obtenirListeContact(String searchEntry){
         ListeContact lc = new ListeContact();
         // Vérifier que la liste n'est pas empty
@@ -162,6 +203,9 @@ public class ListeContact extends ArrayList<Contact>{
         return lc;
     }
 
+    /**
+     * @return Un string qui représente tout les contacts de la liste d'une manière soigné.
+     * */
     private String getCompleteList(){
         StringBuilder sb = new StringBuilder();
         if (this.size() != 0) {
@@ -177,6 +221,10 @@ public class ListeContact extends ArrayList<Contact>{
         return sb.toString();
     }
 
+    /**
+     * Affiche un message d'erreur si la liste de contact est vide.
+     * @return true si la liste est vide
+     * */
     private boolean isEmptyList(){
         if (this.isEmpty()){
             Menu2.afficherMenu("Erreur", "Vous n'avez pas de contact dans votre liste (Enter any to quit)",
